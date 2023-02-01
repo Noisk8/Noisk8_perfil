@@ -8,7 +8,7 @@ description: |
 tags:
   - StableDiffusion
   - Deforum
-  - Livecoding
+  - Python
 ---
 
 Este taller busca aportar herramientas prácticas para crear conceptos visuales con inteligencia artificial.
@@ -48,19 +48,21 @@ Las inscripciones siempre están abiertas
 
 El Taller es personalizado  para brindar mayor atención a las necesidades de la participante
 
-El talller tiene un costo de 260 mil pesos colombianos >  45 US
+* El talller tiene un costo de 260 mil pesos colombianos  45 US -
 
- Si estas ubicado en Medllín puede ser presencial si usted lo desea.
-si no esta en Medellín se hace de forma virtual :)
+* Si estas ubicado en Medllín puede ser presencial si usted lo desea.
 
-2 Sesiones de 3 horas 
+* si no esta en Medellín se hace de forma virtual :)
 
-1 sesion 
+### 2 Sesiones de 2.5 horas 
+
+### 1 sesion 
 Redes neuronales (Teorico)
 Introducion (practica) a la AI 
 Manipulando Stable Diffusion 
 
-2da sesion 
+### 2da sesion 
+
 Google colab Research 
 Animaciones con Deforum 
 Input video con deforum 
