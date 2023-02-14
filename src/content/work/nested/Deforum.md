@@ -48,7 +48,7 @@ Las inscripciones siempre están abiertas
 
 El Taller es personalizado  para brindar mayor atención a las necesidades de la participante
 
-* El talller tiene un costo de 260 mil pesos colombianos  45 US -
+* El talller tiene un costo de 350 mil pesos colombianos  65 US -
 
 * Si estas ubicado en Medllín puede ser presencial si usted lo desea.
 
