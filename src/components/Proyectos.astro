@@ -1,0 +1,77 @@
+---
+interface Props {
+    title: string;
+    tagline?: string;
+    align?: 'start' | 'center';
+    link?: string;
+    image?: string;
+}
+
+const { align = 'center', tagline, title, link, image } = Astro.props;
+---
+
+<header class:list={['hero stack gap-4', align]}>
+    <div class="stack gap-2">
+        <h1 class="title">{title}</h1>
+        {image && <img src={image} alt={title} class="project-image" />}
+        {tagline && <p class="tagline">{tagline}</p>}
+        <a href={link} class="btn">Ver Proyectos</a>
+    </div>
+    <slot />
+</header>
+
+<style>
+  
+    .hero {
+        font-size: var(--text-lg);
+        text-align: center;
+    }
+
+
+
+    .title {
+        font-size: 20px;
+  
+    }
+
+    .project-image {
+        max-width: 40%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.5em 1em;
+        font-size: var(--text-md);
+        color: var(--gray-0);
+        background-color: var(--primary-color);
+        text-decoration: none;
+        border-radius: 0.25em;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: var(--primary-color-dark);
+    }
+
+    @media (min-width: 50em) {
+        .hero {
+            font-size: var(--text-xl);
+        }
+
+        .start {
+            text-align: start;
+        }
+
+        .start .title,
+        .start .tagline {
+            margin-inline: unset;
+        }
+
+        .title {
+            font-size: var(--text-5xl);
+        }
+    }
+</style>

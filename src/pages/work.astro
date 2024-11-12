@@ -1,12 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
-
 import BaseLayout from '../layouts/BaseLayout.astro';
-
 import ContactCTA from '../components/ContactCTA.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
+import Proyectos from '../components/Proyectos.astro';
+
 
 const projects = (await getCollection('work')).sort(
 	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
@@ -15,15 +15,17 @@ const projects = (await getCollection('work')).sort(
 
 <BaseLayout
 	title="Dev| Noisk8"
-	description="Learn about Noisk8 most recent projects"
+	description="Noisk8 Works"
 >
 	<div class="stack gap-20">
-		<main class="wrapper stack gap-8">
+		<main class="wrapper stack gap-8 ">
 			<Hero
 				title="Dev - Creative Coder"
-				tagline="Si estás interesado en explorar la intersección entre la tecnología y la creatividad, estos cursos son perfectos para ti. Aprenderás a utilizar lenguajes de programación como JavaScript, Python y sopke para crear obras digitales únicas y sorprendentes.  y aplicaciones interactivas, nuestros cursos te brindarán una amplia gama de habilidades para ayudarte a desarrollar tus ideas digitales.   "
+				tagline="Cómo porgramador creativo me gusta trabajar en proyectos que me permitan las fronteras entre el codigo abierto y el arte multimedial"
 				align="start"
 			/>
+			
+
 			<Grid variant="offset">
 				{
 					projects.map((project) => (
@@ -33,6 +35,11 @@ const projects = (await getCollection('work')).sort(
 					))
 				}
 			</Grid>
+
+
+
+</div>
+
 		</main>
 		<ContactCTA />
 	</div>
