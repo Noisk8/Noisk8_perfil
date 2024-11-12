@@ -11,6 +11,8 @@ import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
+import Frontendev from '../components/Frontendev.astro';
+import Creativecoder from '../components/Creativecoder.astro';
 
 // Page section components
 import ContactCTA from '../components/ContactCTA.astro';
@@ -55,11 +57,10 @@ const projects = (await getCollection('work'))
 		<main class="wrapper stack gap-20 lg:gap-48">
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Cursos</h3>
-					<p>Aquí puedes ver los cursos de programación creativa con enfoque audiovisual  que ofrezco </p>
+					<Frontendev />
 				</header>
 
-				<div class="gallery">
+				<!-- <div class="gallery">
 					<Grid variant="offset">
 						{
 							projects.map((project) => (
@@ -69,7 +70,8 @@ const projects = (await getCollection('work'))
 							))
 						}
 					</Grid>
-				</div>
+				</div> -->
+				
 
 				<div class="cta">
 					<CallToAction href="/work/">
@@ -79,15 +81,12 @@ const projects = (await getCollection('work'))
 				</div>
 			</section>
 
-			<section class="section with-background bg-variant">
-				<header class="content-center stack gap-2 lg:gap-4">
-					<h3 class="" >Colecciones</h3>
-					
-				<p >Surf the sea </p>
-				<a href="https://opensea.io/collection/surf-the-sea" target="_blank">	<p>Disponible en Opensea</p></a>
-				</header>
-
-				<div class="gallery">
+			<section class="with-background bg-variant">
+		
+					<Creativecoder />
+			
+				
+				<!-- <div class="gallery">
 					<Grid variant="small">
 					
 							
@@ -121,8 +120,10 @@ const projects = (await getCollection('work'))
 							
 						
 					</Grid>
-				</div>
+				</div> -->
 			</section>
+
+			
 		</main>
 
 		<ContactCTA />

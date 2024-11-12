@@ -1,0 +1,78 @@
+---
+---
+
+<style>
+    .pb-8 {
+        padding-bottom: 2rem;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    ul li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem; /* Agrega más espacio entre cada elemento de la lista */
+
+    }
+
+    ul li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+    }
+
+    ul li:hover::before {
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 50% {
+            opacity: 1;
+        }
+        50.01%, 100% {
+            opacity: 0;
+        }
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: purple; /* Cambia el color del texto a morado */
+    }
+    h3{
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+</style>
+
+<div>
+    <div class="pb-8"> 
+        <h3>Creative Coder</h3>
+        <p>
+            Aquí puedes ver los proyectos en los que he trabajado cómo desarrollador creativo 
+        </p>
+    </div>
+    <ul>
+        <li>
+            <a href="https://platohedro.github.io/powertocommons/" target="_blank"><h4>FoxDot + Processing</h4></a>
+        </li>
+        <li>
+            <a href="https://curatingcommonwellbeing.platohedro.org/" target="_blank"><h4>GeniaLab Cinemateca Bogota</h4></a>
+        </li>
+        <li>
+            <a href="https://residencias.platohedro.org/hablaraplantas/index.html" target="_blank"><h4>El sueño de una Pensión</h4></a>
+        </li>
+        <li>
+            <a href="https://charts-impacto.vercel.app/" target="_blank"><h4>Animaciones con Deforum</h4></a>
+        </li>
+        <li>
+            <a href="https://carpediem-santa-elena.vercel.app/" target="_blank"><h4>Script para instalar Din Is Noise</h4></a>
+        </li>
+        <li>
+            <a href="https://galeria-lampara.vercel.app/" target="_blank"><h4>Script para instalar FoxDot/Renardo</h4></a>
+        </li>
+      
+    </ul>
+</div>

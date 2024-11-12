@@ -1,135 +1,145 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-import ContactCTA from '../components/ContactCTA.astro';
-import Hero from '../components/Hero.astro';
+import ContactCTA from "../components/ContactCTA.astro";
+import Hero from "../components/Hero.astro";
 ---
 
 <BaseLayout title="About | Noisk8" description="About Noisk8 White Lorem Ipsum">
-	<div class="stack gap-20">
-		<main class="wrapper about">
-			<Hero
-				title="About"
-				tagline=":(){ :|:& };:"
-			>
-				<img
-					width="1553"
-					height="873"
-					src="/assets/noi.jpg"
-					alt="Noisk8 White at work with a colleague"
-				/>
-			</Hero>
+  <div class="stack gap-20">
+    <main class="wrapper about">
+      <Hero title="Juan Jaramillo Silva" tagline=":(){ :|:& };:">
+        <img
+          width="1553"
+          height="873"
+          src="/assets/noi.jpg"
+          alt="Noisk8 White at work with a colleague"
+        />
+      </Hero>
 
-			<section>
-				<h2 class="section-title">Background</h2>
-				<div class="content">
+      <section>
+        <h2 class="section-title">Background</h2>
+        <div class="content">
+          <ul>
+            <li>
+              <p>
+                Web Master en <a href="" target="_blank">Platohedro  </a> 2020 - Actualidad [Wordpress, html5, js, github, Linux]
+              </p>
+            </li>
+			<li>
+				<p>
+				 Tallerista y creativo en <a href="" target="_blank">Genia Lab </a>  - Cinemateca Bogota 2023  [js, Python, Deforum, Linux]
+				</p>
+			  </li>
 
+			  <li>
+				<p>
+				 Tallerista y Front End Dev en <a href="https://platohedro.github.io/GenIA_web/" target="_blank">Genia Lab </a>  - Medellín 2023  [Html5, Spatial, js, Python, Deforum, Linux]
+				</p>
+			  </li>
 
-					<ul>
+			  
+            <li>
+              <p>
+                Mentor <a href="https://astro.build/"> Programna de delegación </a>  de <a href="https://astro.build/"> Nym </a>2023-2024  [Shell, Linux, Git]
+          
+              </p>
+            </li>
 
-<li>
-	<p>
-		Cuento con más de 6 años de experiencia con sistemas operativos Linux, y programación creativa.
-		 
-	</p>
+            <li>
+              <p>
+               FrontEnd Dev en<a href="https://yunupanasimi-2-0-pp67.vercel.app/" target="_blank"> Yupanasimi</a> 2023 [Astro, Html5, github]
+              </p>
+            </li>
 
-</li>
-<li>
-	<p>
-		Programo paginas web con html5, <a href="https://astro.build/">Astro</a> , tailwind, wordpress
-	</p>
-</li>
+			<li>
+				<p>
+				 FrontEnd Dev en<a href="https://carpediem-santa-elena.vercel.app/" target="_blank"> Carpediem Santa Elena</a> 2023 [Astro, Html5, github]
+				</p>
+			  </li>
+		
+          </ul>
+        </div>
+      </section>
+      <section>
+        <h2 class="section-title">Educación</h2>
+        <div class="content">
+          <p>Estudie elaboración de guión Audiovisual pero no lo desempeño</p>
+        </div>
+        <div class="content">
+          <p>Aprendí a programar de manera autodidacta :p</p>
+        </div>
+      </section>
+      <section>
+        <h2 class="section-title">Skills</h2>
+        <div class="content">
+          <p>
+            Linux \ shell \ Markdown \ Python \ Javascript \ Astro \ React \
+            Html5 \ Git \ Github \ Vscode  WordPress \
+            StableDiffusion \ Deforum \ 
+          </p>
+        </div>
+      </section>
+    </main>
 
-<li>
-
-	<p>
-		Utilizo el codigo de manera creativa para hacer mùsica y sonido en tiempo real
-	</p>
-
-</li>
-
-					</ul>
-					
-</div>
-					
-
-			
-			</section>
-			<section>
-				<h2 class="section-title">Educación</h2>
-				<div class="content">
-					<p>Estudie elaboración de guión Audiovisual pero no lo desempeño </p>
-				</div>
-				<div class="content">
-					<p>Aprendí a programar de manera autodidacta :p</p>
-				</div>
-			</section>
-			<section>
-				<h2 class="section-title">Skills</h2>
-				<div class="content">
-					<p> Linux \ shell \ Markdown \ Python \ Javascript \ Astro (React) \ Htmml5 \ Git \ Github \ Vscode \ Spoke \ Mozilla Hubs \ WordPress \ StableDiffusion \ Deforum \ AI Tools  </p>
-				</div>
-			</section>
-		</main>
-
-		<ContactCTA />
-	</div>
+    <ContactCTA />
+  </div>
 </BaseLayout>
 
 <style>
-	.about {
-		display: flex;
-		flex-direction: column;
-		gap: 3.5rem;
-	}
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
 
-	img {
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+  img {
+    margin-top: 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-md);
+  }
 
-	section {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		color: var(--gray-200);
-	}
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--gray-200);
+  }
 
-	.section-title {
-		grid-column-start: 1;
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-	}
+  .section-title {
+    grid-column-start: 1;
+    font-size: var(--text-xl);
+    color: var(--gray-0);
+  }
 
-	.content {
-		grid-column: 2 / 4;
-	}
+  .content {
+    grid-column: 2 / 4;
+  }
 
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
+  .content :global(a) {
+    text-decoration: 1px solid underline transparent;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color var(--theme-transition);
+  }
 
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
+  .content :global(a:hover),
+  .content :global(a:focus) {
+    text-decoration-color: currentColor;
+  }
 
-	@media (min-width: 50em) {
-		.about {
-			display: grid;
-			grid-template-columns: 1fr 60% 1fr;
-		}
+  @media (min-width: 50em) {
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 60% 1fr;
+    }
 
-		.about > :global(:first-child) {
-			grid-column-start: 2;
-		}
+    .about > :global(:first-child) {
+      grid-column-start: 2;
+    }
 
-		section {
-			display: contents;
-			font-size: var(--text-lg);
-		}
-	}
+    section {
+      display: contents;
+      font-size: var(--text-lg);
+    }
+  }
 </style>
