@@ -9,7 +9,10 @@ npm create astro@latest -- --template portfolio
 
 > 🧑‍🚀 **Made with Astro** 
 
+![noinoi](https://github.com/user-attachments/assets/50640a7c-67bc-4100-8b57-698f8db37799)
 
+
+![nononononoon](https://github.com/user-attachments/assets/e80fa300-cdb0-4f43-a377-34d8cdced1fd)
 
 ## 🧞 Commands
 
@@ -22,4 +25,6 @@ npm create astro@latest -- --template portfolio
 | `npm run preview`      | Preview your build locally, before deploying     |
 | `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro --help` | Get help using the Astro CLI                     |
+
+
 
