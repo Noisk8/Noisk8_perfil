@@ -1,10 +1,10 @@
 ---
 title: Campamento Livecoder 
 publishDate: 2020-10-02 00:00:00
-img: /assets/hydra.gif
+img: /assets/sevilla.png
 img_alt: nelpastel
 description: |
-  Campamento de Livecoding 2019 [Santos de maimona -España]
+  Livecoding  [ Santos de maimona | Sevilla - España ]
 tags:
   - Livecoding
   - Python

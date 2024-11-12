@@ -1,35 +1,20 @@
 ---
-title: Yupanasimi
+title: PUMPUMYACHKAN
 publishDate: 2020-03-02 00:00:00
 img: /assets/toke.gif
 img_alt: Festival 
 description: |
-  Festival de teconologia y conocimientos ancestrales en Cusco Peru
+  Pumpumyachkan tinkuy  2021[Cusco - Peru]
 tags:
   - Python
   - Workshop
   - Livecoding
 ---
 
-## Level-two heading
+Aprende a tunear tu ordenador para hacer música con código…
 
-> Tell me and I forget. Teach me and I remember. Involve me and I learn.
+Este taller es un espacio de replica de conocimiento enfocado a reconocer las nociones basicas para crear música mediante livecoding, utilizando un lenguaje llamado FoxDot, diseñado para hacer livecoding, en el que no se necesita saber de matematicas o tener experiencia previa en el mundo de la programación, pues gracias a lxs desarrolladorxs, algunos software como Foxdot son más amigables, lo cual permite que la curva de aprendizaje sea mucho más llana.
 
-Lorem ipsum dolor sit amet, <a href="https://astro.build/">Astro</a> makes people happy. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum id venenatis a condimentum vitae. Dapibus ultrices in iaculis nunc. Arcu odio ut sem nulla pharetra diam sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare.
+FoxDot es una librería Python fácil de usar, que crea un entorno de programación interactivo y habla con el potente motor de síntesis de sonido, llamado SuperCollider para hacer música. FoxDot programa eventos musicales de una manera sencilla, de usar y de comprender, lo que hace que la programación en vivo sea fácil y divertida, tanto para lxs recién llegadxs como para los veteranxs.
 
-Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Eget gravida cum sociis natoque penatibus. Cras fermentum odio eu feugiat pretium nibh. Proin nibh nisl condimentum id venenatis. Porta nibh venenatis cras sed felis eget velit. Id diam vel quam elementum pulvinar etiam non.
-
-### Level-three heading
-
-Ultrices tincidunt arcu non sodales neque sodales ut. Sed enim ut sem viverra aliquet eget sit amet. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra. Viverra accumsan in nisl nisi scelerisque eu ultrices. In massa tempor nec feugiat nisl pretium fusce.
-
-### Level-three heading
-
-Sed pulvinar porttitor mi in ultricies. Etiam non dolor gravida eros pulvinar pellentesque et dictum ex. Proin eu ornare ligula, sed condimentum dui. Vivamus tincidunt tellus mi, sed semper ipsum pharetra a. Suspendisse sollicitudin at sapien nec volutpat. Etiam justo urna, laoreet ac lacus sed, ultricies facilisis dolor. Integer posuere, metus vel viverra gravida, risus elit ornare magna, id feugiat erat risus ullamcorper libero. Proin vitae diam auctor, laoreet lorem vitae, varius tellus.
-
-Aenean pretium purus augue, ut bibendum erat convallis quis. Cras condimentum quis velit ac mollis. Suspendisse non purus fringilla, venenatis nisl porta, finibus odio. Curabitur aliquet metus faucibus libero interdum euismod. Morbi sed magna nisl. Morbi odio nibh, facilisis vel sapien eu, tempus tincidunt erat. Nullam erat velit, sagittis at purus quis, tristique scelerisque tortor. Pellentesque lacinia tortor id est aliquam viverra. Vestibulum et diam ac ipsum mollis fringilla.
-
-#### Level-four heading
-
-- We noted this
-- And also this other point
+El livecoding es una nueva dirección en la música electrónica y el video, y está llegando a un lugar interesante. Lxs livecoders exponen y recablean las entrañas del software mientras generan música y/o visuales improvisados. Toda la manipulación del código se proyecta para su placer. La codificación en vivo funciona en todos los géneros musicales, y se ha visto en salas de conciertos, bares de jazz nocturnos, así como en algoritmos. También hay un fuerte movimiento de codificadorxs en vivo basados en video, escribiendo código para hacer visuales, y muchos ambientes pueden hacer tanto sonido como video, creando experiencias sinestésicas.

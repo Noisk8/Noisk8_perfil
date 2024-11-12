@@ -1,46 +1,36 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactCTA from '../components/ContactCTA.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
-import Hero from '../components/Hero.astro';
-import Grid from '../components/Grid.astro';
-import Proyectos from '../components/Proyectos.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import PortfolioPreview from "../components/PortfolioPreview.astro";
+import Hero from "../components/Hero.astro";
+import Grid from "../components/Grid.astro";
+import Proyectos from "../components/Proyectos.astro";
 
-
-const projects = (await getCollection('work')).sort(
-	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+const projects = (await getCollection("work")).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
 ---
 
-<BaseLayout
-	title="Dev| Noisk8"
-	description="Noisk8 Works"
->
-	<div class="stack gap-20">
-		<main class="wrapper stack gap-8 ">
-			<Hero
-				title="Dev - Creative Coder"
-				tagline="Cómo porgramador creativo me gusta trabajar en proyectos que me permitan las fronteras entre el codigo abierto y el arte multimedial"
-				align="start"
-			/>
-			
+<BaseLayout title="Dev| Noisk8" description="Noisk8 Works">
+  <div class="stack gap-20 ">
+    <main class="wrapper stack gap-8 pb-8">
+      <Hero
+        title="Dev - Creative Coder"
+        tagline="Cómo porgramador creativo me gusta trabajar en proyectos que me permitan las fronteras entre el codigo abierto y el arte multimedial"
+        align="start"
+      />
 
-			<Grid variant="offset">
-				{
-					projects.map((project) => (
-						<li>
-							<PortfolioPreview project={project} />
-						</li>
-					))
-				}
-			</Grid>
-
-
-
-</div>
-
-		</main>
-		<ContactCTA />
-	</div>
+      <Grid variant="offset" >
+        {
+          projects.map((project) => (
+            <li>
+              <PortfolioPreview project={project} />
+            </li>
+          ))
+        }
+      </Grid>
+    </main>
+  </div>
+  <ContactCTA />
 </BaseLayout>

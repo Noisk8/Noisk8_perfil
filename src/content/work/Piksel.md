@@ -1,17 +1,21 @@
 ---
-title: Piksel
+title: Piksel 17
 publishDate: 2020-10-02 00:00:00
-img: /assets/hydra.gif
+img: /assets/piksel.png
 img_alt: nelpastel
 description: |
-  Festival de artes libre en noruega
+  Festival Piksel 2018 [Bergen-Noruega]
 tags:
-  - Javascript
-  - VJ
+  - Din Is Noise
+  - Scripting
   - Livecoding
+  - Performance
 ---
 
 
-¡Te invito al taller de VJ con la librería Hydra de JavaScript! Si estás interesado en el mundo de la visualización en tiempo real, esta es tu oportunidad perfecta para aprender a crear increíbles experiencias visuales con la librería Hydra. Durante el taller, aprenderás cómo utilizar la librería para crear patrones generativos, animaciones y efectos en tiempo real, y cómo utilizar diferentes entradas como el sonido y la cámara para controlar tus creaciones. Además, se discutirán las aplicaciones prácticas de la creación de VJ en eventos en vivo, instalaciones interactivas y producciones audiovisuales. 
+El festival Piksel es uno de los festivales de artes tecnologicas más importante del mundo dew codigo abierto, se celebra en Bergen Noruega 
 
-Este taller es apropiado tanto para principiantes como para usuarios intermedios de JavaScript y se brindará un apoyo continuo durante todo el proceso. ¡Únete a nosotros para descubrir las posibilidades infinitas de la creación de VJ con Hydra!
+Participe en la <a href="https://17.piksel.no/">versión 17  </a>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/X5PpvNQk-J0?si=yUztlDUwbgVQpmby" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<a href="https://17.piksel.no/?p=30" target="_blank">Ver proyecto </a>
