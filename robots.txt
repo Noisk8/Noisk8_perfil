@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.noisk8.xyz/sitemap.xml
+
+# Permitir acceso a todas las secciones principales
+Allow: /inicio
+Allow: /dev
+Allow: /noisk8
+
+# Optimizar el rastreo
+Crawl-delay: 10
