@@ -13,11 +13,11 @@ import Hero from "../components/Hero.astro";
           width="1553"
           height="873"
           src="/assets/noi.jpg"
-          alt="Noisk8 White at work with a colleague"
-          class="mb-16"
+          alt="Noisk8 "
+          class="profile-image"
         />
 
-        <div class="pt-16">
+        <div class="text-content">
           <p class="pt-8">
             Soy un desarrollador FrontEnd apasionado por la tecnologías de
             código abierto, tengo más de 6 años de experiencia trabajando cómo
@@ -179,10 +179,16 @@ import Hero from "../components/Hero.astro";
     gap: 3.5rem;
   }
 
-  img {
+  .profile-image {
     margin-top: 1.5rem;
+    margin-bottom: 2rem;
     border-radius: 1.5rem;
     box-shadow: var(--shadow-md);
+  }
+
+  .text-content {
+    margin-top: 2rem;
+    padding-top: 1rem;
   }
 
   section {
