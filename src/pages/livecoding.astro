@@ -1,273 +1,628 @@
 ---
-import { getCollection } from 'astro:content';
-
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-// Component Imports
-import CallToAction from '../components/CallToAction.astro';
-import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
-
-// Page section components
 import ContactCTA from '../components/ContactCTA.astro';
-import Skills from '../components/Skills.astro';
 
-// Content Fetching: List four most recent work projects
-const projects = (await getCollection('work'))
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
+const videoCatalog = {
+  raAAfT1D4Ls: {
+    id: 'raAAfT1D4Ls',
+    title: 'Livecoding set Calle 9 (fragmento)',
+    duration: 57,
+    url: 'https://www.youtube.com/watch?v=raAAfT1D4Ls',
+    year: '2019',
+    description: 'Clip breve desde la Calle 9 capturando la energía de un set relámpago.',
+  },
+  HuUW_KZs8n4: {
+    id: 'HuUW_KZs8n4',
+    title: 'Campamento RandomOriented / Noisk8',
+    duration: 1408,
+    url: 'https://www.youtube.com/watch?v=HuUW_KZs8n4',
+    year: '2023',
+    description: 'Registro del set audiovisual durante la residencia Campamento RandomOriented 2023.',
+  },
+  xQL5cw_YF4k: {
+    id: 'xQL5cw_YF4k',
+    title: 'Algorumba Ojack B2B Noisk8 2',
+    duration: 38,
+    url: 'https://www.youtube.com/watch?v=xQL5cw_YF4k',
+    year: '2017',
+    description: 'Ritmos relámpago en formato B2B junto a Ojack para Algorumba.',
+  },
+  czFdMfM8KCQ: {
+    id: 'czFdMfM8KCQ',
+    title: 'sk8noise - Livecoding ASCII',
+    duration: 214,
+    url: 'https://www.youtube.com/watch?v=czFdMfM8KCQ',
+    year: '2019',
+    description: 'Mini performance con Python y FoxDot generando ASCII art y texturas glitch.',
+  },
+  hQpFLSqCRro: {
+    id: 'hQpFLSqCRro',
+    title: 'Enfermxs Terminales Vol. 4',
+    duration: 3437,
+    url: 'https://www.youtube.com/watch?v=hQpFLSqCRro',
+    year: '2018',
+    description: 'Livecoding colectivo con Enfermxs Terminales explorando capas ruidistas.',
+  },
+  CXgJHSbgRVc: {
+    id: 'CXgJHSbgRVc',
+    title: 'HKD',
+    duration: 2676,
+    url: 'https://www.youtube.com/watch?v=CXgJHSbgRVc',
+    year: '2017',
+    description: 'Set extenso cargado de percusión algorítmica y texturas densas.',
+  },
+  gVrzLI57wfw: {
+    id: 'gVrzLI57wfw',
+    title: 'Algorumba Manizales / Ojack B2B Noisk8',
+    duration: 41,
+    url: 'https://www.youtube.com/watch?v=gVrzLI57wfw',
+    year: '2017',
+    description: 'Fragmento de la sesión B2B con Ojack durante Algorumba Manizales.',
+  },
+  ODDK0AOKums: {
+    id: 'ODDK0AOKums',
+    title: 'Flor de Fuego x Noisk8',
+    duration: 1957,
+    url: 'https://www.youtube.com/watch?v=ODDK0AOKums',
+    year: '2020',
+    description: 'Colaboración con Flor de Fuego mezclando canto y código en escena.',
+  },
+  MlpBY33IEQA: {
+    id: 'MlpBY33IEQA',
+    title: 'Eulerroom Equinox 2020 - Medellín',
+    duration: 1611,
+    url: 'https://www.youtube.com/watch?v=MlpBY33IEQA',
+    year: '2020',
+    description: 'Participación de Noisk8 en el streaming global de Eulerroom Equinox 2020.',
+  },
+  KeZ1BJjqLfE: {
+    id: 'KeZ1BJjqLfE',
+    title: 'TOPLAP15 - Noisk8',
+    duration: 1350,
+    url: 'https://www.youtube.com/watch?v=KeZ1BJjqLfE',
+    year: '2019',
+    description: 'Set celebrado durante el aniversario 15 de TOPLAP con patrones frenéticos.',
+  },
+  uKrPHMY0yMc: {
+    id: 'uKrPHMY0yMc',
+    title: 'LiveCoding renardo + Hydra',
+    duration: 3128,
+    url: 'https://www.youtube.com/watch?v=uKrPHMY0yMc',
+    year: '2025',
+    description: 'Streaming junto a renardo combinando Hydra y síntesis algorítmica.',
+  },
+  Uj0a09VrK4M: {
+    id: 'Uj0a09VrK4M',
+    title: 'Live-Coding Session 002 - NOISE - Hydra',
+    duration: 3434,
+    url: 'https://www.youtube.com/watch?v=Uj0a09VrK4M',
+    year: '2023',
+    description: 'Sesión extendida centrada en Hydra para experimentar con feedback visual.',
+  },
+  b6HyL0MIrk8: {
+    id: 'b6HyL0MIrk8',
+    title: 'Consciencia en Código Vol. 2',
+    duration: 7394,
+    url: 'https://www.youtube.com/watch?v=b6HyL0MIrk8',
+    year: '2021',
+    description: 'Conversatorio-performance sobre livecoding en Proyecto MUTAR.',
+  },
+  NF4dnfi0mDg: {
+    id: 'NF4dnfi0mDg',
+    title: 'Consciencia en Código Vol. 1',
+    duration: 4182,
+    url: 'https://www.youtube.com/watch?v=NF4dnfi0mDg',
+    year: '2020',
+    description: 'Primera entrega de Consciencia en Código junto a la comunidad MUTAR.',
+  },
+  'xyf88-iRqvA': {
+    id: 'xyf88-iRqvA',
+    title: 'El olvidado - FoxDot livecoding',
+    duration: 325,
+    url: 'https://www.youtube.com/watch?v=xyf88-iRqvA',
+    year: '2019',
+    description: 'Improvisación íntima en FoxDot inspirada en memorias del barrio.',
+  },
+  xUA1ujOBk08: {
+    id: 'xUA1ujOBk08',
+    title: 'MEDEKILLER 2.0 - FoxDot',
+    duration: 755,
+    url: 'https://www.youtube.com/watch?v=xUA1ujOBk08',
+    year: '2019',
+    description: 'Versión 2.0 de MEDEKILLER con grooves hipnóticos en Python.',
+  },
+  vnXEHKHyL4w: {
+    id: 'vnXEHKHyL4w',
+    title: 'Cacerolazo livecodero',
+    duration: 281,
+    url: 'https://www.youtube.com/watch?v=vnXEHKHyL4w',
+    year: '2019',
+    description: 'Cacerolazo algorítmico inspirado en las movilizaciones sociales.',
+  },
+  '6PlxVX9t7AQ': {
+    id: '6PlxVX9t7AQ',
+    title: 'MEDEKILLER - FoxDot',
+    duration: 198,
+    url: 'https://www.youtube.com/watch?v=6PlxVX9t7AQ',
+    year: '2019',
+    description: 'Set breve de MEDEKILLER con percusiones generativas.',
+  },
+  qcEsj1KPnBM: {
+    id: 'qcEsj1KPnBM',
+    title: 'Nucl30r0t0',
+    duration: 648,
+    url: 'https://www.youtube.com/watch?v=qcEsj1KPnBM',
+    year: '2019',
+    description: 'Livecoding oscuro con bajos saturados y ritmos rotos.',
+  },
+  v2nuIdPWRXU: {
+    id: 'v2nuIdPWRXU',
+    title: 'CyberAforismo - FoxDot',
+    duration: 579,
+    url: 'https://www.youtube.com/watch?v=v2nuIdPWRXU',
+    year: '2019',
+    start: 445,
+    description: 'Texturas glitch y spoken word; el embed inicia en el bloque principal.',
+  },
+  'Wl1vp-5AbXc': {
+    id: 'Wl1vp-5AbXc',
+    title: 'M0raviazo',
+    duration: 351,
+    url: 'https://www.youtube.com/watch?v=Wl1vp-5AbXc',
+    year: '2020',
+    description: 'Improvisación pulseada inspirada en Moravia, con beats ácidos y líneas percusivas en vivo.',
+  },
+  UFrefhdwcp8: {
+    id: 'UFrefhdwcp8',
+    title: 'CP Homenaje - FoxDot',
+    duration: 423,
+    url: 'https://www.youtube.com/watch?v=UFrefhdwcp8',
+    year: '2019',
+    description: 'Homenaje en código dedicado a la comunidad CP.',
+  },
+  fXtvnABhme0: {
+    id: 'fXtvnABhme0',
+    title: 'downU - Livecoding politic',
+    duration: 546,
+    url: 'https://www.youtube.com/watch?v=fXtvnABhme0',
+    year: '2019',
+    start: 168,
+    description: 'Livecoding de corte político que mezcla discurso y percusión algorítmica.',
+  },
+  'e3sWKHLZp_A': {
+    id: 'e3sWKHLZp_A',
+    title: 'CAMARADA 3.0',
+    duration: 198,
+    url: 'https://www.youtube.com/watch?v=e3sWKHLZp_A',
+    year: '2021',
+    description: 'Set compacto con percusiones sincopadas y leads glitch para activar la pista.',
+  },
+  juGPvElUDX0: {
+    id: 'juGPvElUDX0',
+    title: 'CampamentoCyberpunk - ICLC 2020',
+    duration: 665,
+    url: 'https://www.youtube.com/watch?v=juGPvElUDX0',
+    year: '2020',
+    description: 'Presentación de Noisk8 durante CampamentoCyberpunk en el ICLC 2020.',
+  },
+  vS9AF6BhP1M: {
+    id: 'vS9AF6BhP1M',
+    title: '21E RadioComunication',
+    duration: 352,
+    url: 'https://www.youtube.com/watch?v=vS9AF6BhP1M',
+    year: '2020',
+    description: 'Interferencia sonora en vivo para la señal de 21E RadioComunication.',
+  },
+  wjoWGtwyLU4: {
+    id: 'wjoWGtwyLU4',
+    title: 'El multitask',
+    duration: 594,
+    url: 'https://www.youtube.com/watch?v=wjoWGtwyLU4',
+    year: '2020',
+    description: 'Orquestación multitarea de código, síntesis y visuales en tiempo real.',
+  },
+  uWmt0iXuJek: {
+    id: 'uWmt0iXuJek',
+    title: 'S0_pl3_l0',
+    duration: 353,
+    url: 'https://www.youtube.com/watch?v=uWmt0iXuJek',
+    year: '2021',
+    description: 'Paisaje rítmico en tempo medio con arpegios saturados y bajos modulados.',
+  },
+  kJhn68mm8SI: {
+    id: 'kJhn68mm8SI',
+    title: 'Pure Data LiveSet',
+    duration: 3002,
+    url: 'https://www.youtube.com/watch?v=kJhn68mm8SI',
+    year: '2020',
+    description: 'Live set íntegro construido en Pure Data y controlado en vivo.',
+  },
+  WGp16aV3YFY: {
+    id: 'WGp16aV3YFY',
+    title: 'Sesión 0.1 40T3N4',
+    duration: 2364,
+    url: 'https://www.youtube.com/watch?v=WGp16aV3YFY',
+    year: '2020',
+    start: 1893,
+    description: 'Capas densas de IDM y ambient; iniciamos en el segundo bloque clave.',
+  },
+};
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+const livecodingSections = [
+  {
+    title: 'Festivales y residencias',
+    description:
+      'Performances extensos en festivales, residencias y encuentros translocales donde el livecoding sostiene todo el set.',
+    videoIds: [
+      'HuUW_KZs8n4',
+      'WGp16aV3YFY',
+      'kJhn68mm8SI',
+      'juGPvElUDX0',
+      'MlpBY33IEQA',
+      'KeZ1BJjqLfE',
+      'hQpFLSqCRro',
+      'CXgJHSbgRVc',
+    ],
+  },
+  {
+    title: 'Colaboraciones y comunidades',
+    description:
+      'Proyectos compartidos, B2B y espacios de aprendizaje colectivo alrededor del livecoding latino.',
+    videoIds: [
+      'b6HyL0MIrk8',
+      'NF4dnfi0mDg',
+      'ODDK0AOKums',
+      'vS9AF6BhP1M',
+      'xQL5cw_YF4k',
+      'gVrzLI57wfw',
+    ],
+  },
+  {
+    title: 'Hydra y streaming audiovisual',
+    description:
+      'Sesiones enfocadas en síntesis visual con Hydra, mezcla de streams y experimentos multitarea.',
+    videoIds: [
+      'uKrPHMY0yMc',
+      'Uj0a09VrK4M',
+      'wjoWGtwyLU4',
+    ],
+  },
+  {
+    title: 'Laboratorio FoxDot y calle',
+    description:
+      'Improvisaciones cortas, piezas de calle y exploraciones activistas usando FoxDot y herramientas libres.',
+    videoIds: [
+      'raAAfT1D4Ls',
+      'czFdMfM8KCQ',
+      'xyf88-iRqvA',
+      'xUA1ujOBk08',
+      'vnXEHKHyL4w',
+      '6PlxVX9t7AQ',
+      'qcEsj1KPnBM',
+      'v2nuIdPWRXU',
+      'Wl1vp-5AbXc',
+      'UFrefhdwcp8',
+      'fXtvnABhme0',
+      'e3sWKHLZp_A',
+      'uWmt0iXuJek',
+    ],
+  },
+];
+
+const formatDuration = (totalSeconds) => {
+  if (!Number.isFinite(totalSeconds)) return '';
+  const seconds = Math.round(totalSeconds);
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remaining = seconds % 60;
+
+  if (hours > 0) {
+    return `${hours}:${String(minutes).padStart(2, '0')}:${String(remaining).padStart(2, '0')}`;
+  }
+
+  return `${minutes}:${String(remaining).padStart(2, '0')}`;
+};
+
+const getEmbedUrl = (video) => {
+  const base = `https://www.youtube.com/embed/${video.id}`;
+  if (video.start) {
+    return `${base}?start=${video.start}`;
+  }
+  return base;
+};
+
+const sections = livecodingSections.map((section) => ({
+  ...section,
+  videos: section.videoIds.map((id) => videoCatalog[id]),
+}));
 ---
-
 <BaseLayout>
-	<div class="stack gap-20 lg:gap-48">
-		<div class="wrapper stack gap-8 lg:gap-20">
-			<header class="hero">
-				<Hero
-					title="Noisk8"
-					tagline="I am a Creative Coder, livecoder and linux evangelist"
-					align="start"
-				>
-					<div class="roles">
-						<a href="" target="_blank"><Pill>  <Icon icon="terminal-window" size="1.33em" /> Opensea</Pill></a>
-						<a href="" target="_blank"><Pill><Icon icon="terminal-window" size="1.33em" /> Nativo</Pill></a>
-						<a href="" target="_blank"><Pill><Icon icon="terminal-window" size="1.33em" /> Doingud</Pill></a>
-					</div>
-				</Hero>
+  <div class="stack gap-20 lg:gap-48">
+    <div class="wrapper stack gap-8 lg:gap-20">
+      <header class="hero">
+        <Hero
+          title="Livecoding"
+          tagline="Improvisación audiovisual, herramientas abiertas y sesiones generativas en vivo."
+          align="start"
+        >
+          <div class="roles">
+            <a href="https://www.youtube.com/@noisk8" target="_blank" rel="noopener noreferrer">
+              <Pill><Icon icon="youtube-logo" size="1.33em" /> Canal de YouTube</Pill>
+            </a>
+            <a href="https://www.twitch.tv/noisk8" target="_blank" rel="noopener noreferrer">
+              <Pill><Icon icon="twitch-logo" size="1.33em" /> Twitch</Pill>
+            </a>
+          </div>
+        </Hero>
 
-				<img
-					alt="Noisk8"
-					width="420"
-					height="420"
-					src="/assets/noi.jpg"
-				/>
-			</header>
+        <img
+          alt="Noisk8 livecoding"
+          width="420"
+          height="420"
+          src="/assets/noi.jpg"
+        />
+      </header>
 
-			<!-- <Skills /> -->
-		</div>
+      <div class="intro stack gap-3">
+        <p>
+          Desde el livecoding exploro narrativas sonoras y visuales con software libre, comunidades
+          abiertas y mucha improvisación en vivo.
+        </p>
+        <p class="intro-note">Compilado el 21 de septiembre de 2025.</p>
+      </div>
+    </div>
 
-		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Front End Dev</h3>
-					<p>Aquí puedes ver los cursos de programación creativa con enfoque audiovisual  que ofrezco </p>
-				</header>
+    <main class="wrapper stack gap-15 lg:gap-30">
+      <section class="section with-background highlights">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Destacados </h2>
+          <p>Selección de lanzamientos paralelos al livecoding: un EP clave y un track recién publicado.</p>
+        </header>
 
-				<div class="gallery">
-					<Grid variant="offset">
-						{
-							projects.map((project) => (
-								<li>
-									<PortfolioPreview project={project} />
-								</li>
-							))
-						}
-					</Grid>
-				</div>
+        <div class="highlight-grid">
+          <article class="highlight-card album">
+            <div class="highlight-copy stack gap-2">
+              <h3>NR20 - Primero el fango luego el loto</h3>
+              <p>
+                EP publicado en 2019 donde la improvisación algorítmica se mezcla con ritmos híbridos y paisajes
+                industriales.
+              </p>
+            </div>
+            <div class="bandcamp-embed">
+              <iframe
+                style="border: 0; width: 100%; height: 120px;"
+                src="https://bandcamp.com/EmbeddedPlayer/album=821458116/size=large/bgcol=333333/linkcol=ffffff/tracklist=false/artwork=small/transparent=true/"
+                seamless
+              >
+                <a href="https://nucleoroto.bandcamp.com/album/nr20-primero-el-fango-luego-el-loto-noisk8-digital-ep-release-medellin-colombia-2019">
+                  NR20 - "Primero el fango luego el loto" - Noisk8 - Digital EP Release - Medellin, Colombia 2019 by Noisk8
+                </a>
+              </iframe>
+            </div>
+          </article>
 
-				<div class="cta">
-					<CallToAction href="/work/">
-						View All
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
-				</div>
-			</section>
+          <article class="highlight-card track">
+            <div class="highlight-copy stack gap-2">
+              <h3>Shine - Nuevo track</h3>
+              <p>
+                Pieza fresca que expande el universo livecoding hacia texturas más etéreas y capas vocales moduladas.
+              </p>
+            </div>
+            <a
+              class="highlight-link"
+              href="https://shine-warpcast.vercel.app/token/43"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Escuchar track
+              <Icon icon="arrow-right" size="1.1em" />
+            </a>
+          </article>
+        </div>
+      </section>
 
-			<section class="section with-background bg-variant">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h1>Proyectos</h1>
-					
-				<h2>Surf the sea </h2>
-				<a href="https://opensea.io/collection/surf-the-sea" target="_blank">	<p>Disponible en Opensea</p></a>
-				</header>
+      {sections.map((section) => (
+        <section class="section with-background live-section">
+          <header class="section-header stack gap-2 lg:gap-3">
+            <h2>{section.title}</h2>
+            <p>{section.description}</p>
+          </header>
 
-				<div class="gallery">
-					<Grid variant="small">
-					
-							
-					
-				
-				<video width="420"  controls autoplay loop>
-  <source src="/assets/Surfthesea1.mp4"  type="video/mp4">
- 
-Your browser does not support the video tag.
-</video> 
+          <div class="video-grid">
+            {section.videos.map((video) => (
+              <article class="video-card">
+                <div class="video-wrapper">
+                  <iframe
+                    src={getEmbedUrl(video)}
+                    title={video.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
 
-<video width="420"  controls autoplay loop >
-  <source src="/assets/surfthesea4.mp4"  type="video/mp4">
- 
-Your browser does not support the video tag.
-</video> 
+                <div class="video-meta stack gap-1">
+                  <h3>
+                    <a href={video.url} target="_blank" rel="noopener noreferrer">
+                      {video.title}
+                    </a>
+                  </h3>
+                  <p class="video-details">
+                    <span>{formatDuration(video.duration)}</span>
+                    {video.year && <span> - {video.year}</span>}
+                  </p>
+                  <p>{video.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </main>
 
-<video width="420"  controls autoplay loop>
-  <source src="/assets/surfthesea3.mp4"  type="video/mp4">
- 
-Your browser does not support the video tag.
-</video> 
-<video width="420"  controls autoplay loop>
-	<source src="/assets/Surfthesea2.mp4"  type="video/mp4">
-   
-  Your browser does not support the video tag.
-  </video> 
- 
-
-
-							
-						
-					</Grid>
-				</div>
-			</section>
-		</main>
-
-		<ContactCTA />
-	</div>
+    <ContactCTA />
+  </div>
 </BaseLayout>
 
 <style>
-	.hero {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 2rem;
-	}
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
 
-	.roles {
-		display: none;
-	}
+  .roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
 
-	.hero img {
-		aspect-ratio: 5 / 4;
-		object-fit: cover;
-		object-position: top;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+  .hero img {
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-md);
+  }
 
-	@media (min-width: 50em) {
-		.hero {
-			display: grid;
-			grid-template-columns: 6fr 4fr;
-			padding-inline: 2.5rem;
-			gap: 3.75rem;
-		}
+  .intro {
+    font-size: 1.05rem;
+    max-width: 60ch;
+    margin-inline: auto;
+  }
 
-		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
-		}
+  .intro-note {
+    font-size: 0.95rem;
+    color: var(--gray-300, rgba(255, 255, 255, 0.7));
+  }
 
-		.hero img {
-			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
-			object-fit: cover;
-		}
-	}
+  .highlights {
+    gap: 2rem;
+  }
 
-	/* ====================================================== */
+  .highlight-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
 
-	.section {
-		display: grid;
-		gap: 2rem;
-	}
+  .highlight-card {
+    display: grid;
+    gap: 1.25rem;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
 
-	.with-background {
-		position: relative;
-	}
+  .highlight-card.album {
+    background: rgba(51, 51, 51, 0.4);
+  }
 
-	.with-background::before {
-		--hero-bg: var(--bg-image-subtle-2);
+  .highlight-copy h3 {
+    font-size: 1.2rem;
+  }
 
-		content: '';
-		position: absolute;
-		pointer-events: none;
-		left: 50%;
-		width: 100vw;
-		aspect-ratio: calc(2.25 / var(--bg-scale));
-		top: 0;
-		transform: translateY(-75%) translateX(-50%);
-		background: url('/assets/backgrounds/noise.png') top center/220px repeat,
-			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat, var(--gray-999);
-		background-blend-mode: overlay, normal, normal, normal;
-		mix-blend-mode: var(--bg-blend-mode);
-		z-index: -1;
-	}
+  .bandcamp-embed iframe {
+    border-radius: 0.75rem;
+    width: 100%;
+  }
 
-	.with-background.bg-variant::before {
-		--hero-bg: var(--bg-image-subtle-1);
-	}
+  .highlight-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    background: var(--gradient-subtle, rgba(255, 255, 255, 0.08));
+    color: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 150ms ease, background 150ms ease;
+  }
 
-	.section-header {
-		justify-self: center;
-		text-align: center;
-		max-width: 50ch;
-		font-size: var(--text-md);
-		color: var(--gray-300);
-	}
+  .highlight-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.12);
+  }
 
-	.section-header h3 {
-		font-size: var(--text-2xl);
-	}
+  .live-section {
+    gap: 2rem;
+  }
 
-	@media (min-width: 50em) {
-		.section {
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
-			gap: 5rem;
-		}
+  .video-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
 
-		.section.with-cta {
-			grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
-		}
+  .video-card {
+    display: grid;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
 
-		.section-header {
-			grid-area: header;
-			font-size: var(--text-lg);
-		}
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 0.75rem;
+  }
 
-		.section-header h3 {
-			font-size: var(--text-4xl);
-		}
+  .video-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-		.with-cta .section-header {
-			justify-self: flex-start;
-			text-align: left;
-		}
+  .video-meta h3 {
+    font-size: 1.1rem;
+  }
 
-		.gallery {
-			grid-area: gallery;
-		}
+  .video-details {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.68);
+  }
 
-		.cta {
-			grid-area: cta;
-		}
-	}
+  @media (min-width: 40em) {
+    .intro {
+      margin-inline: 0;
+    }
 
-	/* ====================================================== */
+    .highlight-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-	.mention-card {
-		display: flex;
-		height: 7rem;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
-	}
+    .video-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
 
-	@media (min-width: 50em) {
-		.mention-card {
-			border-radius: 1.5rem;
-			height: 9.5rem;
-		}
-	}
+  @media (min-width: 50em) {
+    .hero {
+      display: grid;
+      grid-template-columns: 6fr 4fr;
+      padding-inline: 2.5rem;
+      gap: 3.75rem;
+      align-items: center;
+    }
+
+    .intro {
+      max-width: 50ch;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .video-wrapper iframe {
+      animation: none;
+    }
+  }
 </style>
