@@ -1,277 +1,581 @@
 ---
 import { getCollection } from 'astro:content';
-
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-// Component Imports
 import CallToAction from '../components/CallToAction.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
-import Frontendev from '../components/Frontendev.astro';
-import Creativecoder from '../components/Creativecoder.astro';
-// Page section components
-import ContactCTA from '../components/ContactCTA.astro';
+import PortfolioPreview from '../components/PortfolioPreview.astro';
+import { creativeShowcase, frontendShowcase } from '../data/showcases';
 
-
-// Content Fetching: List four most recent work projects
 const projects = (await getCollection('work'))
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+const latestProjects = projects.slice(0, 4);
+
+const uniqueYears = Array.from(
+  new Set(projects.map((project) => new Date(project.data.publishDate).getFullYear())),
+).filter(Number.isFinite).sort((a, b) => a - b);
+
+const yearRange = uniqueYears.length
+  ? uniqueYears.length === 1
+    ? String(uniqueYears[0])
+    : `${uniqueYears[0]}-${uniqueYears[uniqueYears.length - 1]}`
+  : 'En curso';
+
+const quickStats = [
+  { label: 'Proyectos front-end', value: frontendShowcase.length },
+  { label: 'Creative coding', value: creativeShowcase.length },
+  { label: 'Casos documentados', value: projects.length },
+  { label: 'Años activo', value: yearRange },
+];
+
+const stackHighlights = Array.from(
+  new Set(frontendShowcase.flatMap((item) => item.stack ?? [])),
+).slice(0, 6);
+
+const services = [
+  {
+    title: 'Interfaces accesibles',
+    description: 'Diseño y desarrollo de UI responsivas con foco en accesibilidad y rendimiento.',
+    icon: 'code',
+    link: '#frontend',
+  },
+  {
+    title: 'Experiencias inmersivas',
+    description: 'Narrativas audiovisuales en vivo que combinan livecoding, visuales y sonido.',
+    icon: 'microphone-stage',
+    link: '#creative',
+  },
+  {
+    title: 'Ecosistemas Web3',
+    description: 'Acompañamiento técnico para nodos, DAOs y campañas de adopción en redes descentralizadas.',
+    icon: 'rocket-launch',
+    link: 'https://nodos.vercel.app/',
+  },
+];
+
+const quickNav = [
+  { id: 'services', label: 'Servicios' },
+  { id: 'frontend', label: 'Front-end' },
+  { id: 'creative', label: 'Creative coding' },
+  { id: 'recent-work', label: 'Casos documentados' },
+];
+
+const frontHighlights = frontendShowcase.slice(0, 6);
+const creativeHighlights = creativeShowcase.slice(0, 6);
 ---
-
 <BaseLayout>
-	<div class="stack gap-20 lg:gap-48">
-		<div class="wrapper stack gap-8 lg:gap-20">
-			<header class="hero">
-				<Hero
-					title="Noisk8"
-					tagline="Front-End dev, Operador de Nodos blockchain, Creative coder & Entusiasta del código abierto"
-					align="start"
-				>
-					<div class="roles">
-						<a href="https://noisk8.xyz" target="_blank"><Pill>  <Icon icon="terminal-window" size="1.33em" /> FrontEnd</Pill></a>
-						<a href="https://nodos.vercel.app/" target="_blank"><Pill><Icon icon="terminal-window" size="1.33em" /> Node Operator</Pill></a>
-						<a href="https://noisk8.xyz/livecoding" target="_blank"><Pill><Icon icon="terminal-window" size="1.33em" /> LiveCoder</Pill></a>
-					</div>
-				</Hero>
+  <div class="stack gap-20 lg:gap-48">
+    <div class="wrapper stack gap-8 lg:gap-20">
+      <header class="hero">
+        <Hero
+          title="Noisk8"
+          tagline="Frontend & creative coder construyendo experiencias abiertas, accesibles y en tiempo real."
+          align="start"
+        >
+          <div class="hero-copy stack gap-3">
+            <p>
+              Desarrollo productos digitales y performances en vivo para organizaciones, colectivos y escenas
+              alternativas. Mezclo sistemas distribuidos, experimentación audiovisual y diseño centrado en
+              comunidad.
+            </p>
+            <div class="hero-actions">
+              <span class="hero-muted">Disponible para colaboraciones remotas e híbridas.</span>
+            </div>
+            <div class="hero-tags">
+              {stackHighlights.map((item) => (
+                <span>{item}</span>
+              ))}
+            </div>
+          </div>
+          <div class="hero-pills">
+            <a href="https://noisk8.xyz" target="_blank" rel="noopener noreferrer">
+              <Pill><Icon icon="terminal-window" size="1.1em" /> Portfolio</Pill>
+            </a>
+            <a href="https://nodos.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <Pill><Icon icon="terminal-window" size="1.1em" /> Node Operator</Pill>
+            </a>
+            <a href="/livecoding" rel="noopener">
+              <Pill><Icon icon="terminal-window" size="1.1em" /> Livecoding</Pill>
+            </a>
+            <a href="/dj" rel="noopener">
+              <Pill><Icon icon="terminal-window" size="1.1em" /> DJ</Pill>
+            </a>
+          </div>
+        </Hero>
 
-				<img
-					alt="Noisk8"
-					width="420"
-					height="520"
-					src="/assets/noi.jpg"
-				/>
-			</header>
+        <img
+          alt="Retrato de Noisk8"
+          width="420"
+          height="520"
+          src="/assets/noi.jpg"
+        />
+      </header>
+    </div>
 
-			<!-- <Skills /> -->
-		</div>
+    <main class="wrapper stack gap-15 lg:gap-30">
+      <section class="section quick-insights">
+        <div class="stats-grid">
+          {quickStats.map((stat) => (
+            <article class="stat-card">
+              <p class="stat-value">{stat.value}</p>
+              <p class="stat-label">{stat.label}</p>
+            </article>
+          ))}
+        </div>
 
-		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<Frontendev />
-				</header>
+        <nav class="quick-nav" aria-label="Mapa de contenidos">
+          <span class="quick-nav-label">Explorar:</span>
+          <ul>
+            {quickNav.map((item) => (
+              <li>
+                <a href={`#${item.id}`}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </section>
 
-				<!-- <div class="gallery">
-					<Grid variant="offset">
-						{
-							projects.map((project) => (
-								<li>
-									<PortfolioPreview project={project} />
-								</li>
-							))
-						}
-					</Grid>
-				</div> -->
-				
+      <section id="services" class="section with-background services">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Servicios clave</h2>
+          <p>Trabajo desde la experimentación, pero con procesos claros: investigación, prototipado ágil y entrega.</p>
+        </header>
 
-				<div class="cta">
-					<CallToAction href="https://github.com/noisk8" >
-						Ver más
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
-				</div>
-			</section>
+        <div class="service-grid">
+          {services.map((service) => (
+            <article class="service-card">
+              <div class="service-icon">
+                <Icon icon={service.icon} size="1.5em" />
+              </div>
+              <div class="service-copy stack gap-1">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </div>
+              <a
+                class="service-link"
+                href={service.link}
+                target={service.link.startsWith('#') ? '_self' : '_blank'}
+                rel={service.link.startsWith('#') ? undefined : 'noopener noreferrer'}
+              >
+                Conocer más
+                <Icon icon="arrow-right" size="1em" />
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
 
-			<section class="section with-background bg-variant  with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-		
-					<Creativecoder />
-				</header>
-					<div class="cta">
-						<CallToAction href="/work/">
-							Ver más
-							<Icon icon="arrow-right" size="1.2em" />
-						</CallToAction>
-					</div>
-				<!-- <div class="gallery">
-					<Grid variant="small">
-					
-							
-					
-				
-				<video width="420"  controls autoplay loop>
-				<source src="/assets/Surfthesea1.mp4"  type="video/mp4">
-				
-				Your browser does not support the video tag.
-				</video> 
+      <section id="frontend" class="section with-background showcase">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Front-end con propósito</h2>
+          <p>Micrositios, dashboards y herramientas públicas para comunidades digitales y redes descentralizadas.</p>
+        </header>
 
-				<video width="420"  controls autoplay loop >
-				<source src="/assets/surfthesea4.mp4"  type="video/mp4">
-				
-				Your browser does not support the video tag.
-				</video> 
+        <div class="showcase-grid">
+          {frontHighlights.map((item) => (
+            <article class="showcase-card">
+              <div class="showcase-header">
+                <h3>{item.title}</h3>
+                <a href={item.url} target="_blank" rel="noopener noreferrer">
+                  <Icon icon="arrow-right" size="1em" />
+                </a>
+              </div>
+              <p>{item.summary}</p>
+              {item.stack && (
+                <ul class="stack-chips">
+                  {item.stack.slice(0, 3).map((tech) => (
+                    <li>{tech}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          ))}
+        </div>
 
-				<video width="420"  controls autoplay loop>
-				<source src="/assets/surfthesea3.mp4"  type="video/mp4">
-				
-				Your browser does not support the video tag.
-				</video> 
-				<video width="420"  controls autoplay loop>
-					<source src="/assets/Surfthesea2.mp4"  type="video/mp4">
-				
-				Your browser does not support the video tag.
-				</video> 
-				
+        <div class="section-cta">
+          <a class="section-secondary" href="https://github.com/noisk8" target="_blank" rel="noopener noreferrer">
+            Ver más proyectos
+          </a>
+        </div>
+      </section>
 
+      <section id="creative" class="section with-background showcase">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Creative coding & live media</h2>
+          <p>Instalaciones, scripts y herramientas libres para expandir experiencias audiovisuales en vivo.</p>
+        </header>
 
-							
-						
-					</Grid>
-				</div> -->
-			</section>
+        <div class="showcase-grid">
+          {creativeHighlights.map((item) => (
+            <article class="showcase-card">
+              <div class="showcase-header">
+                <h3>{item.title}</h3>
+                <a href={item.url} target="_blank" rel="noopener noreferrer">
+                  <Icon icon="arrow-right" size="1em" />
+                </a>
+              </div>
+              <p>{item.summary}</p>
+              {item.stack && (
+                <ul class="stack-chips">
+                  {item.stack.slice(0, 3).map((tech) => (
+                    <li>{tech}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          ))}
+        </div>
 
-			
-		</main>
+        <div class="section-cta">
+          <CallToAction href="/livecoding">
+            Explorar livecoding
+            <Icon icon="arrow-right" size="1.1em" />
+          </CallToAction>
+        </div>
+      </section>
 
-		<ContactCTA />
-	</div>
+      <section id="recent-work" class="section with-background recent-work">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Casos documentados</h2>
+          <p>Una selección de residencias, talleres y colaboraciones publicadas en detalle.</p>
+        </header>
+
+        <Grid variant="offset">
+          {latestProjects.map((project) => (
+            <li>
+              <PortfolioPreview project={project} />
+            </li>
+          ))}
+        </Grid>
+
+        <div class="section-cta">
+          <CallToAction href="/work/">
+            Ver archivo completo
+            <Icon icon="arrow-right" size="1.1em" />
+          </CallToAction>
+        </div>
+      </section>
+    </main>
+
+    <ContactCTA />
+  </div>
 </BaseLayout>
 
 <style>
-	.hero {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 2rem;
-	}
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
 
-	.roles {
-		display: none;
-	}
+  .hero-copy p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
 
-	.hero img {
-		aspect-ratio: 5 / 4;
-		object-fit: cover;
-		object-position: top;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
 
-	@media (min-width: 50em) {
-		.hero {
-			display: grid;
-			grid-template-columns: 6fr 4fr;
-			padding-inline: 2.5rem;
-			gap: 3.75rem;
-		}
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+    transition: background 150ms ease, transform 150ms ease;
+  }
 
-		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
-		}
+  .hero-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
 
-		.hero img {
-			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
-			object-fit: cover;
-		}
-	}
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 
-	/* ====================================================== */
+  .hero-tags span {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
 
-	.section {
-		display: grid;
-		gap: 2rem;
-	}
+  .hero-pills {
+    display: none;
+  }
 
-	.with-background {
-		position: relative;
-	}
+  .hero img {
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-md);
+  }
 
-	.with-background::before {
-		--hero-bg: var(--bg-image-subtle-2);
+  .quick-insights {
+    display: grid;
+    gap: 2rem;
+  }
 
-		content: '';
-		position: absolute;
-		pointer-events: none;
-		left: 50%;
-		width: 100vw;
-		aspect-ratio: calc(2.25 / var(--bg-scale));
-		top: 0;
-		transform: translateY(-75%) translateX(-50%);
-		background: url('/assets/backgrounds/noise.png') top center/220px repeat,
-			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat, var(--gray-999);
-		background-blend-mode: overlay, normal, normal, normal;
-		mix-blend-mode: var(--bg-blend-mode);
-		z-index: -1;
-	}
+  .stats-grid {
+    display: grid;
+    gap: 1rem;
+  }
 
-	.with-background.bg-variant::before {
-		--hero-bg: var(--bg-image-subtle-1);
-	}
+  .stat-card {
+    padding: 1.25rem 1.5rem;
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
 
-	.section-header {
-		justify-self: center;
-		text-align: center;
-		max-width: 50ch;
-		font-size: var(--text-md);
-		color: var(--gray-300);
-	}
+  .stat-value {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
 
-	.section-header h3 {
-		font-size: var(--text-2xl);
-	}
+  .stat-label {
+    margin-top: 0.35rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
 
-	@media (min-width: 50em) {
-		.section {
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
-			gap: 5rem;
-		}
+  .quick-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+  }
 
-		.section.with-cta {
-			grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
-		}
+  .quick-nav-label {
+    font-weight: 600;
+  }
 
-		.section-header {
-			grid-area: header;
-			font-size: var(--text-lg);
-		}
+  .quick-nav ul {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-		.section-header h3 {
-			font-size: var(--text-4xl);
-		}
+  .quick-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 150ms ease, transform 150ms ease;
+  }
 
-		.with-cta .section-header {
-			justify-self: flex-start;
-			text-align: left;
-		}
+  .quick-nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
 
-		.gallery {
-			grid-area: gallery;
-		}
+  .services {
+    gap: 2.5rem;
+  }
 
-		.cta {
-			grid-area: cta;
-		}
-	}
+  .service-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
 
-	/* ====================================================== */
+  .service-card {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    padding: 1.75rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
 
-	.mention-card {
-		display: flex;
-		height: 7rem;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
-	}
+  .service-icon {
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.1);
+  }
 
-	@media (min-width: 50em) {
-		.mention-card {
-			border-radius: 1.5rem;
-			height: 9.5rem;
-		}
-	}
+  .service-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+    padding: 0.65rem 1.05rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .service-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .showcase {
+    gap: 2.5rem;
+  }
+
+  .showcase-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .showcase-card {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
+
+  .showcase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .showcase-header a {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    text-decoration: none;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .showcase-header a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .stack-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .stack-chips li {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+
+  .section-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .section-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.65rem 1.05rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .section-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .recent-work {
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 40em) {
+    .stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .service-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .showcase-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 50em) {
+    .hero {
+      display: grid;
+      grid-template-columns: 6fr 4fr;
+      padding-inline: 2.5rem;
+      gap: 3.75rem;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .hero img {
+      aspect-ratio: 3 / 4;
+      border-radius: 4.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-link,
+    .service-link,
+    .quick-nav a,
+    .showcase-header a,
+    .section-secondary {
+      transition: none;
+    }
+  }
 </style>

@@ -1,36 +1,613 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import ContactCTA from "../components/ContactCTA.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
-import Hero from "../components/Hero.astro";
-import Grid from "../components/Grid.astro";
-import Proyectos from "../components/Proyectos.astro";
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Grid from '../components/Grid.astro';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import PortfolioPreview from '../components/PortfolioPreview.astro';
+import { creativeShowcase, frontendShowcase } from '../data/showcases';
 
-const projects = (await getCollection("work")).sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+const projects = (await getCollection('work'))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const latestProjects = projects.slice(0, 6);
+
+const frontStack = Array.from(
+  new Set(frontendShowcase.flatMap((item) => item.stack ?? [])),
+);
+
+const creativeStack = Array.from(
+  new Set(creativeShowcase.flatMap((item) => item.stack ?? [])),
+);
+
+const uniqueYears = Array.from(
+  new Set(projects.map((project) => new Date(project.data.publishDate).getFullYear())),
+).filter(Number.isFinite).sort((a, b) => a - b);
+
+const yearRange = uniqueYears.length
+  ? uniqueYears.length === 1
+    ? String(uniqueYears[0])
+    : `${uniqueYears[0]}-${uniqueYears[uniqueYears.length - 1]}`
+  : 'En curso';
+
+const quickStats = [
+  { label: 'Proyectos front-end', value: frontendShowcase.length },
+  { label: 'Creative tools', value: creativeShowcase.length },
+  { label: 'Stack activo', value: `${frontStack.length + creativeStack.length}+ herramientas` },
+  { label: 'Años documentados', value: yearRange },
+];
+
+const quickNav = [
+  { id: 'services', label: 'Servicios' },
+  { id: 'portfolio', label: 'Portafolio front-end' },
+  { id: 'toolkit', label: 'Toolkit' },
+  { id: 'creative', label: 'Creative coding' },
+  { id: 'archive', label: 'Archivo documentado' },
+];
+
+const serviceLines = [
+  {
+    title: 'Landing y storytelling',
+    description: 'Diseño y desarrollo de landing pages estratégicas con copy y visuales sincronizados.',
+    icon: 'paper-plane-tilt',
+  },
+  {
+    title: 'Dashboards de datos',
+    description: 'Construcción de paneles con métricas en tiempo real para equipos comunitarios o Web3.',
+    icon: 'list',
+  },
+  {
+    title: 'Sitios multilingües',
+    description: 'Implementación de contenidos localizados y flujos de traducción sin fricción.',
+    icon: 'strategy',
+  },
+  {
+    title: 'Infra distribuida',
+    description: 'Monitoreo y front-ends para nodos, DAOs y proyectos basados en privacidad.',
+    icon: 'rocket-launch',
+  },
+];
+
+const frontGroups = [
+  {
+    title: 'Comunidades y cultura digital',
+    description: 'Sitios informativos y experiencias interactivas para colectivos, residencias y proyectos educativos.',
+    items: frontendShowcase.filter((item) =>
+      ['El Rincón de la Privacidad', 'Power to Commons', 'Curating Common Wellbeing', 'Daoariwas', 'Renardo en Español']
+        .includes(item.title),
+    ),
+  },
+  {
+    title: 'Dashboards y herramientas internas',
+    description: 'Aplicaciones ligeras para visualizar datos, gestionar procesos y automatizar tareas.',
+    items: frontendShowcase.filter((item) =>
+      ['Doc App', 'Infografía de datos', 'Nodos NYM', 'Formulario con base de datos', 'Rincón del Café']
+        .includes(item.title),
+    ),
+  },
+  {
+    title: 'Campañas y landing pages',
+    description: 'Landing pages de alto impacto con formularios, mapas y animaciones personalizadas.',
+    items: frontendShowcase.filter((item) =>
+      ['Carpediem Santa Elena', 'Taller AI Vartex', 'Wal2Wal', 'Campaña Navidad', 'Hablar a Plantas', 'Galería con Lámpara']
+        .includes(item.title),
+    ),
+  },
+];
+
+const remainingFront = frontendShowcase.filter((item) =>
+  !frontGroups.some((group) => group.items.includes(item)),
 );
 ---
+<BaseLayout title="Dev | Noisk8" description="Portafolio front-end y creative coding de Noisk8">
+  <div class="stack gap-20 lg:gap-48">
+    <div class="wrapper stack gap-8 lg:gap-20">
+      <header class="hero">
+        <Hero
+          title="Dev & Creative coder"
+          tagline="Interfaz, comunidad y narrativas digitales para proyectos abiertos y descentralizados."
+          align="start"
+        >
+          <div class="hero-copy stack gap-3">
+            <p>
+              Me especializo en front-ends accesibles, dashboards de datos y soporte técnico a comunidades que
+              experimentan con blockchain, livecoding y cultura libre. Cada proyecto nace desde la colaboración.
+            </p>
+            <div class="hero-actions">
+              <a class="hero-link" href="https://www.linkedin.com/in/noisk8/" target="_blank" rel="noopener noreferrer">
+                Conectar en LinkedIn
+              </a>
+            </div>
+          </div>
+        </Hero>
+      </header>
+    </div>
 
-<BaseLayout title="Dev| Noisk8" description="Noisk8 Works">
-  <div class="stack gap-20 ">
-    <main class="wrapper stack gap-8 pb-8">
-      <Hero
-        title="Dev - Creative Coder"
-        tagline="Cómo porgramador creativo me gusta trabajar en proyectos que me permitan las fronteras entre el codigo abierto y el arte multimedial"
-        align="start"
-      />
+    <main class="wrapper stack gap-15 lg:gap-30">
+      <section class="section quick-insights">
+        <div class="stats-grid">
+          {quickStats.map((stat) => (
+            <article class="stat-card">
+              <p class="stat-value">{stat.value}</p>
+              <p class="stat-label">{stat.label}</p>
+            </article>
+          ))}
+        </div>
 
-      <Grid variant="offset" >
-        {
-          projects.map((project) => (
+        <nav class="quick-nav" aria-label="Mapa de contenidos">
+          <span class="quick-nav-label">Explorar:</span>
+          <ul>
+            {quickNav.map((item) => (
+              <li>
+                <a href={`#${item.id}`}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </section>
+
+      <section id="services" class="section with-background services">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Servicios & entregables</h2>
+          <p>Procesos modulares: discovery rápido, prototipos navegables y soporte post-lanzamiento.</p>
+        </header>
+
+        <div class="service-grid">
+          {serviceLines.map((service) => (
+            <article class="service-card">
+              <div class="service-icon">
+                <Icon icon={service.icon} size="1.5em" />
+              </div>
+              <div class="service-copy stack gap-1">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="portfolio" class="section with-background front-groups">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Portafolio front-end</h2>
+          <p>Casos ordenados por tipo de solución para visualizar alcance y resultados.</p>
+        </header>
+
+        <div class="group-grid">
+          {frontGroups.map((group) => (
+            <article class="group-card">
+              <header class="stack gap-1">
+                <h3>{group.title}</h3>
+                <p>{group.description}</p>
+              </header>
+              <ul class="project-list">
+                {group.items.map((item) => (
+                  <li>
+                    <div class="project-main">
+                      <h4>{item.title}</h4>
+                      <a href={item.url} target="_blank" rel="noopener noreferrer">
+                        <Icon icon="arrow-right" size="1em" />
+                      </a>
+                    </div>
+                    <p>{item.summary}</p>
+                    {item.stack && (
+                      <ul class="stack-chips">
+                        {item.stack.slice(0, 4).map((tech) => (
+                          <li>{tech}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+
+        {remainingFront.length > 0 && (
+          <details class="more-projects">
+            <summary>Otros proyectos relevantes ({remainingFront.length})</summary>
+            <ul class="project-list">
+              {remainingFront.map((item) => (
+                <li>
+                  <div class="project-main">
+                    <h4>{item.title}</h4>
+                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+                      <Icon icon="arrow-right" size="1em" />
+                    </a>
+                  </div>
+                  <p>{item.summary}</p>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+
+        <div class="section-cta">
+          <CallToAction href="mailto:soypablo@protonmail.com">
+            Solicitar propuesta
+            <Icon icon="arrow-right" size="1.1em" />
+          </CallToAction>
+        </div>
+      </section>
+
+      <section id="toolkit" class="section with-background toolkit">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Toolkit activo</h2>
+          <p>Herramientas que aparecen de forma recurrente en proyectos front-end y creative coding.</p>
+        </header>
+
+        <div class="toolkit-grid">
+          <div class="toolkit-column">
+            <h3>Front-end</h3>
+            <ul class="stack-chips">
+              {frontStack.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="toolkit-column">
+            <h3>Creative coding</h3>
+            <ul class="stack-chips">
+              {creativeStack.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="creative" class="section with-background creative-showcase">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Creative coding & scripts</h2>
+          <p>Herramientas y piezas que acompañan mis performances y residencias.</p>
+        </header>
+
+        <div class="showcase-grid">
+          {creativeShowcase.map((item) => (
+            <article class="showcase-card">
+              <div class="showcase-header">
+                <h3>{item.title}</h3>
+                <a href={item.url} target="_blank" rel="noopener noreferrer">
+                  <Icon icon="arrow-right" size="1em" />
+                </a>
+              </div>
+              <p>{item.summary}</p>
+              {item.stack && (
+                <ul class="stack-chips">
+                  {item.stack.slice(0, 4).map((tech) => (
+                    <li>{tech}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="archive" class="section with-background archive">
+        <header class="section-header stack gap-2 lg:gap-3">
+          <h2>Archivo documentado</h2>
+          <p>Seleccioné algunos proyectos publicados en conferencias, residencias y plataformas abiertas.</p>
+        </header>
+
+        <Grid variant="offset">
+          {latestProjects.map((project) => (
             <li>
               <PortfolioPreview project={project} />
             </li>
-          ))
-        }
-      </Grid>
+          ))}
+        </Grid>
+
+        <div class="section-cta">
+          <CallToAction href="/work/">
+            Ver archivo completo
+            <Icon icon="arrow-right" size="1.1em" />
+          </CallToAction>
+        </div>
+      </section>
     </main>
+
+    <ContactCTA />
   </div>
-  <ContactCTA />
 </BaseLayout>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: left;
+  }
+
+  .hero-copy p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .hero-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .quick-insights {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem 1.5rem;
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
+
+  .stat-value {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .stat-label {
+    margin-top: 0.35rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .quick-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .quick-nav-label {
+    font-weight: 600;
+  }
+
+  .quick-nav ul {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .quick-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .quick-nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .services {
+    gap: 2.5rem;
+  }
+
+  .service-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    display: grid;
+    gap: 1rem;
+    padding: 1.75rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
+
+  .service-icon {
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .front-groups {
+    gap: 2.5rem;
+  }
+
+  .group-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .group-card {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.75rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
+
+  .project-list {
+    display: grid;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .project-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .project-main a {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    text-decoration: none;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .project-main a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .stack-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .stack-chips li {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+
+  .more-projects {
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .more-projects summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .section-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .toolkit-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .toolkit-column {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .creative-showcase .showcase-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .showcase-card {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
+
+  .showcase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .showcase-header a {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    text-decoration: none;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .showcase-header a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  @media (min-width: 40em) {
+    .stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .service-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .group-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .toolkit-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .creative-showcase .showcase-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-link,
+    .project-main a,
+    .quick-nav a {
+      transition: none;
+    }
+  }
+</style>

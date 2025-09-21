@@ -334,10 +334,69 @@ const getEmbedUrl = (video) => {
   return base;
 };
 
-const sections = livecodingSections.map((section) => ({
-  ...section,
-  videos: section.videoIds.map((id) => videoCatalog[id]),
-}));
+const slugify = (value) =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+const sections = livecodingSections.map((section) => {
+  const videos = section.videoIds.map((id) => videoCatalog[id]).filter(Boolean);
+  return {
+    ...section,
+    id: slugify(section.title),
+    videos,
+  };
+});
+
+const totalVideos = sections.reduce(
+  (count, section) => count + section.videos.filter(Boolean).length,
+  0,
+);
+
+const totalDurationSeconds = sections.reduce(
+  (total, section) =>
+    total +
+    section.videos.reduce((sectionTotal, video) => {
+      const duration = video?.duration ?? 0;
+      return sectionTotal + duration;
+    }, 0),
+  0,
+);
+
+const uniqueYears = Array.from(
+  new Set(
+    sections.flatMap((section) =>
+      section.videos
+        .map((video) => Number.parseInt(video?.year ?? '', 10))
+        .filter(Number.isFinite),
+    ),
+  ),
+).sort((a, b) => a - b);
+
+const yearRange = uniqueYears.length
+  ? uniqueYears.length === 1
+    ? String(uniqueYears[0])
+    : `${uniqueYears[0]}-${uniqueYears[uniqueYears.length - 1]}`
+  : '';
+
+const formatTotalDuration = (seconds) => {
+  if (!Number.isFinite(seconds) || seconds <= 0) return '0 min';
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.round((seconds % 3600) / 60);
+  const parts = [];
+  if (hours > 0) parts.push(`${hours} h`);
+  if (minutes > 0) parts.push(`${minutes} min`);
+  return parts.join(' ');
+};
+
+const stats = [
+  { label: 'Videos curados', value: totalVideos },
+  { label: 'Años activos', value: yearRange || 'En curso' },
+  { label: 'Duración acumulada', value: formatTotalDuration(totalDurationSeconds) },
+];
 ---
 <BaseLayout>
   <div class="stack gap-20 lg:gap-48">
@@ -376,9 +435,32 @@ const sections = livecodingSections.map((section) => ({
     </div>
 
     <main class="wrapper stack gap-15 lg:gap-30">
-      <section class="section with-background highlights">
+      <section class="section quick-insights">
+        <div class="stats-grid">
+          {stats.map((item) => (
+            <article class="stat-card">
+              <p class="stat-value">{item.value}</p>
+              <p class="stat-label">{item.label}</p>
+            </article>
+          ))}
+        </div>
+
+        <nav class="quick-nav" aria-label="Mapa de contenidos">
+          <span class="quick-nav-label">Explorar:</span>
+          <ul>
+            <li><a href="#destacados">Destacados</a></li>
+            {sections.map((section) => (
+              <li>
+                <a href={`#${section.id}`}>{section.title}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </section>
+
+      <section id="destacados" class="section with-background highlights">
         <header class="section-header stack gap-2 lg:gap-3">
-          <h2>Destacados </h2>
+          <h2>Destacados recientes</h2>
           <p>Selección de lanzamientos paralelos al livecoding: un EP clave y un track recién publicado.</p>
         </header>
 
@@ -425,7 +507,7 @@ const sections = livecodingSections.map((section) => ({
       </section>
 
       {sections.map((section) => (
-        <section class="section with-background live-section">
+        <section id={section.id} class="section with-background live-section">
           <header class="section-header stack gap-2 lg:gap-3">
             <h2>{section.title}</h2>
             <p>{section.description}</p>
@@ -498,6 +580,74 @@ const sections = livecodingSections.map((section) => ({
   .intro-note {
     font-size: 0.95rem;
     color: var(--gray-300, rgba(255, 255, 255, 0.7));
+  }
+
+  .quick-insights {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem 1.5rem;
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: var(--shadow-sm, 0 12px 25px rgba(0, 0, 0, 0.25));
+  }
+
+  .stat-value {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .stat-label {
+    margin-top: 0.25rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .quick-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .quick-nav-label {
+    font-weight: 600;
+  }
+
+  .quick-nav ul {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .quick-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .quick-nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
   }
 
   .highlights {
@@ -595,6 +745,14 @@ const sections = livecodingSections.map((section) => ({
   @media (min-width: 40em) {
     .intro {
       margin-inline: 0;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .quick-nav {
+      justify-content: space-between;
     }
 
     .highlight-grid {

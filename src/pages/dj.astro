@@ -1,0 +1,335 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+
+const djSets = [
+  {
+    title: 'Trusting in the Future',
+    slug: 'trusting-in-the-future',
+    embedUrl:
+      'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&feed=%2Fnoi-silva%2Ftrusting-in-the-future%2F',
+    pageUrl: 'https://www.mixcloud.com/noi-silva/trusting-in-the-future/',
+    description:
+      'Selección melódica para abrir pista con downtempo, breaks suaves y capas emotivas.',
+  },
+  {
+    title: 'Sistemas Volátiles',
+    slug: 'sistemas-volatiles',
+    embedUrl:
+      'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&feed=%2Fnoi-silva%2Fsistemas-volatiles%2F',
+    pageUrl: 'https://www.mixcloud.com/noi-silva/sistemas-volatiles/',
+    description:
+      'Ruta de techno mutante y bass fractal pensada para espacios nocturnos de alta energía.',
+  },
+  {
+    title: 'Radio Volketa Interestelar',
+    slug: 'radio-volketa-interestelar-2021',
+    embedUrl:
+      'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&feed=%2Fnoi-silva%2Fradio-volketa-interestelar-2021%2F',
+    pageUrl: 'https://www.mixcloud.com/noi-silva/radio-volketa-interestelar-2021/',
+    description:
+      'Sesión radial con texturas futuristas, spoken word y vínculos entre dub y ambient.',
+  },
+  {
+    title: 'Pako Perkin DJ Set',
+    slug: 'pako-perkin-dj-set',
+    embedUrl:
+      'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&feed=%2Fnoi-silva%2Fpako_perkin-dj-set-09072021-200-300-am%2F',
+    pageUrl: 'https://www.mixcloud.com/noi-silva/pako_perkin-dj-set-09072021-200300-am/',
+    description:
+      'Recorrido en vivo entre breaks, footwork y ritmos acelerados para escenarios noctámbulos.',
+  },
+  {
+    title: 'Ruidoterapias Electrónicas Vol. 7',
+    slug: 'ruidoterapias-electronicas-vol-7',
+    embedUrl:
+      'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&feed=%2Fnoi-silva%2Fruidoterapias-electronicas-vol-7%2F',
+    pageUrl: 'https://www.mixcloud.com/noi-silva/ruidoterapias-electronicas-vol-7/',
+    description:
+      'Ambientaciones curativas con percusiones tribales, drones y paisajes inmersivos.',
+  },
+  {
+    title: 'Ruidoterapias Electrónicas Vol. 5',
+    slug: 'ruidoterapias-electronicas-vol-5',
+    embedUrl:
+      'https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&feed=%2Fnoi-silva%2Fruidoterapiaselectronica-vol-5%2F',
+    pageUrl: 'https://www.mixcloud.com/noi-silva/ruidoterapiaselectronica-vol-5/',
+    description:
+      'Exploración libre entre IDM, glitch y sintetizadores hipnóticos para escucha profunda.',
+  },
+];
+
+const flyers = [
+  {
+    title: 'TOPLAP Medellín',
+    date: 'Marzo 2024',
+    location: 'Casa Teatro, Medellín',
+    image: '/assets/toplap.jpg',
+    alt: 'Flyer de TOPLAP Medellín con arte glitch y tipografía blanca',
+  },
+  {
+    title: 'Festival ICLC',
+    date: 'Septiembre 2023',
+    location: 'ICLC / Programa Livecoding Global',
+    image: '/assets/iclc.png',
+    alt: 'Flyer con tipografía ICLC y gráficos de código en abstracto',
+  },
+  {
+    title: 'Encuentro Sevilla Algorave',
+    date: 'Mayo 2022',
+    location: 'Sevilla, España',
+    image: '/assets/sevilla.png',
+    alt: 'Flyer azul y rojo del encuentro Algorave Sevilla',
+  },
+  {
+    title: 'Tec de Monterrey Showcase',
+    date: 'Noviembre 2021',
+    location: 'TTU / Monterrey',
+    image: '/assets/ttu.jpg',
+    alt: 'Flyer con colores cálidos para showcase en Tec de Monterrey',
+  },
+];
+---
+<BaseLayout title="DJ Sets — Noi Silva" description="Sesiones como DJ Noi Silva con selecciones de techno, ambient y bass latino." >
+  <div class="stack gap-20 lg:gap-36">
+    <section class="wrapper">
+      <Hero
+        title="DJ"
+        tagline="Noisk8 / No User No cry"
+        align="start"
+      >
+        <div class="dj-hero stack gap-4">
+          <p>
+            Desde 2015 me desenvuelvo como agente sonoro, mis comienzos surguieron con experiencias de proyectos con radios comunitarias y colectivos culturales. 
+          Mi enfoque se centra en usar tecnologías de codigo abierto para la creación y difusión de experiencias sonoras.
+
+            Actualmente pertenezco a NucleoRoto sello fundado en mexico en 2005 y a kbala records sello de la ciudad de Medellín ciudad en la que resido actualmente.
+
+          </p>
+          <figure class="dj-portrait">
+            <img
+              src="/noienpiramides.jpg"
+              alt="Noi Silva mezclando entre estructuras geométricas iluminadas"
+              width="540"
+              height="680"
+              loading="lazy"
+            />
+            <figcaption>Selector y live performer </figcaption>
+          </figure>
+        </div>
+      </Hero>
+    </section>
+
+    <main class="wrapper stack gap-16">
+      <section class="section stack gap-6">
+        <header class="stack gap-2">
+          <h2>Sets</h2>
+          <p>
+            Las cápsulas están alojadas en Mixcloud con metadatos completos y tracklists colaborativos. Usa los
+            reproductores mini para escuchar en la página o ábrelos en una pestaña dedicada.
+          </p>
+        </header>
+
+        <div class="sets-grid">
+          {djSets.map((set) => (
+            <article class="set-card" id={set.slug}>
+              <div class="set-copy stack gap-2">
+                <h3>{set.title}</h3>
+                <p>{set.description}</p>
+              </div>
+              <div class="set-player">
+                <iframe
+                  title={`Mixcloud — ${set.title}`}
+                  src={set.embedUrl}
+                  frameborder="0"
+                  allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"
+                ></iframe>
+              </div>
+              <a
+                class="set-link"
+                href={set.pageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Escuchar en Mixcloud
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="section stack gap-6 flyers">
+        <header class="stack gap-2">
+          <h2>Flyers y fechas</h2>
+          <p>Archivo visual de presentaciones recientes. Actualizo esta sección con los carteles oficiales de cada fecha.</p>
+        </header>
+
+        <div class="flyer-grid">
+          {flyers.map((flyer) => (
+            <article class="flyer-card">
+              <figure class="flyer-media">
+                <img src={flyer.image} alt={flyer.alt} loading="lazy" />
+              </figure>
+              <div class="flyer-meta stack gap-1">
+                <h3>{flyer.title}</h3>
+                <p class="flyer-date">{flyer.date}</p>
+                <p class="flyer-location">{flyer.location}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <ContactCTA />
+  </div>
+
+  <style>
+    .wrapper {
+      max-width: min(1100px, 90vw);
+    }
+
+    .dj-hero {
+      gap: clamp(1.5rem, 2vw, 2.5rem);
+    }
+
+    .dj-portrait {
+      margin: 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .dj-portrait img {
+      width: 100%;
+      height: auto;
+      border-radius: 1.25rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      object-fit: cover;
+    }
+
+    .dj-portrait figcaption {
+      font-size: var(--text-sm);
+      color: var(--gray-400);
+    }
+
+    .sets-grid {
+      display: grid;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .set-card {
+      padding: clamp(1.5rem, 2.5vw, 2rem);
+      background: rgba(20, 20, 30, 0.75);
+      border-radius: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-md);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .set-card h3 {
+      margin: 0;
+      font-size: var(--text-xl);
+      color: var(--gray-0);
+    }
+
+    .set-copy p {
+      color: var(--gray-300);
+      font-size: var(--text-md);
+      line-height: 1.4;
+    }
+
+    .set-player iframe {
+      width: 100%;
+      height: 80px;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(15, 15, 23, 0.6);
+    }
+
+    .set-link {
+      justify-self: start;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--accent-regular);
+      text-decoration: none;
+    }
+
+    .flyer-grid {
+      display: grid;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .flyer-card {
+      padding: clamp(1.25rem, 2vw, 1.75rem);
+      background: rgba(15, 15, 26, 0.75);
+      border-radius: 1.1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .flyer-media {
+      margin: 0;
+    }
+
+    .flyer-media img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      object-fit: cover;
+    }
+
+    .flyer-meta h3 {
+      margin: 0;
+      font-size: var(--text-lg);
+      color: var(--gray-0);
+    }
+
+    .flyer-date {
+      margin: 0;
+      font-size: var(--text-sm);
+      color: var(--gray-300);
+    }
+
+    .flyer-location {
+      margin: 0;
+      font-size: var(--text-sm);
+      color: var(--gray-400);
+    }
+
+    .flyer-location::before {
+      content: '📍 ';
+    }
+
+    .set-link:hover,
+    .set-link:focus {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 60em) {
+      .dj-hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+      }
+
+      .sets-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      }
+
+      .flyer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .set-card {
+        min-height: 220px;
+      }
+    }
+  </style>
+</BaseLayout>
