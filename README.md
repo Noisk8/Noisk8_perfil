@@ -51,6 +51,12 @@ npm run dev
 npm run build
 ```
 
+## Deploy (Vercel)
+
+- Ensure Vercel is deploying the correct Git branch (Project Settings → Git → Production Branch).
+- Keep `ASTRO_BASE` unset on Vercel (this project uses `/` on Vercel by default).
+- This repo includes `vercel.json` to pin `buildCommand` to `npm run build` and `outputDirectory` to `dist`.
+
 ## Configuration
 
 ### Site Configuration
