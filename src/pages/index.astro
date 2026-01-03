@@ -2,18 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { readFile } from 'node:fs/promises';
 
-const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 const asciiArt = await readFile(new URL('../../public/ascii-art.txt', import.meta.url), 'utf-8');
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title="Noisk8">
   <div class="index-content framed">
     <!-- <h1>Inicio</h1>
     <p>Elige a dónde quieres ir:</p> -->
     <pre class="ascii-art" aria-label="ASCII art">{asciiArt}</pre>
     <div class="buttons">
      <a class="button wide" href="https://dev.noisk8.xyz/ " target="_blank" >CV / DEV</a>
-      <a class="button wide" href="https://musica.noisk8.xyz/">Music / LiveCoding</a>
+      <a class="button wide" href="https://musica.noisk8.xyz/" target="_blank">Music / LiveCoding</a>
 
     </div>
   </div>

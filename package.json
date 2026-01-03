@@ -1,13 +1,13 @@
 {
-  "name": "astro-theme-terminal",
+  "name": "noisk8",
   "type": "module",
   "version": "1.0.0",
-  "description": "A terminal-inspired theme for Astro, ported from Hugo Terminal Theme by panr",
+  "description": "mix terminal and retro theme for Astro",
   "license": "MIT",
-  "author": "Dennis Klappe",
+  "author": "Juan Jaramillo",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dennisklappe/astro-theme-terminal"
+    "url": "https://github.com/noisk8"
   },
   "keywords": [
     "astro",

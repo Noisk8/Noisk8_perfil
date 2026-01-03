@@ -101,13 +101,26 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       
       <footer class="footer">
         <div class="footer__inner">
-          <div class="copyright">
-            <span>© 2025 Powered by <a href="https://astro.build">Astro</a></span>
-            <span class="separator">::</span>
-            <span>Theme made by <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">panr</a></span>
-            <span class="separator">::</span>
-            <span>Ported by <a href="https://github.com/dennisklappe">Dennis Klappe</a></span>
-          </div>
+          <a
+            class="footer__github"
+            href="https://github.com/Noisk8"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="22"
+              height="22"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.86 3.16 8.98 7.55 10.44.55.1.75-.24.75-.53v-1.86c-3.07.67-3.72-1.31-3.72-1.31-.5-1.27-1.22-1.61-1.22-1.61-1-.68.08-.67.08-.67 1.1.08 1.68 1.13 1.68 1.13.98 1.67 2.57 1.19 3.2.91.1-.71.38-1.19.69-1.47-2.45-.28-5.02-1.22-5.02-5.44 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.4.11-2.92 0 0 .92-.29 3.01 1.13.87-.24 1.8-.36 2.73-.36.93 0 1.86.12 2.73.36 2.09-1.42 3.01-1.13 3.01-1.13.6 1.52.22 2.64.11 2.92.7.77 1.13 1.75 1.13 2.95 0 4.23-2.58 5.16-5.04 5.43.39.34.74 1.01.74 2.03v3.01c0 .29.2.64.75.53 4.39-1.46 7.55-5.58 7.55-10.44C23.25 5.48 18.27.5 12 .5Z"
+              />
+            </svg>
+          </a>
         </div>
       </footer>
     </div>

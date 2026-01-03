@@ -8,13 +8,28 @@
 .footer__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0;
   max-width: 100%;
 }
 
 .footer a {
   color: inherit;
+}
+
+.footer__github {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  line-height: 0;
+}
+
+.footer__github:hover,
+.footer__github:focus-visible {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .footer .copyright {
