@@ -5,18 +5,28 @@ export interface Props {
   image?: string;
 }
 
-const { title, description = 'A terminal-inspired Astro theme', image } = Astro.props;
+const {
+  title,
+  description = "A terminal-inspired Astro theme",
+  image,
+} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + "/";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
-    <link rel="alternate icon" type="image/x-icon" href={`${base}favicon.ico`} />
+    <link
+      rel="alternate icon"
+      type="image/x-icon"
+      href={`${base}favicon.ico`}
+    />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
       (() => {
@@ -26,24 +36,29 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         } catch {}
       })();
     </script>
-    
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     {image && <meta property="og:image" content={new URL(image, Astro.url)} />}
-    
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {image && <meta name="twitter:image" content={new URL(image, Astro.url)} />}
-    
+
     <link rel="sitemap" href={`${base}sitemap-index.xml`} />
-    <link rel="alternate" type="application/rss+xml" title="RSS" href={`${base}rss.xml`} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS"
+      href={`${base}rss.xml`}
+    />
   </head>
   <body>
     <div class="container center">
@@ -51,13 +66,16 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         <div class="header__inner">
           <div class="header__logo">
             <a href={base}>
-              <div class="logo">
-            Noisk8
-              </div>
+              <div class="logo">Noisk8</div>
             </a>
           </div>
           <div class="header__actions">
-            <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">Theme</button>
+            <button
+              class="theme-toggle"
+              type="button"
+              data-theme-toggle
+              aria-label="Toggle theme">Theme</button
+            >
           </div>
           <!-- <ul class="menu menu--mobile">
             <li class="menu__trigger">Menu ▾</li>
@@ -73,7 +91,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
             </li>
           </ul> -->
         </div>
-<!--         
+        <!--         
         <nav class="navigation-menu">
           <ul class="navigation-menu__inner menu--desktop">
             <li><a href={`${base}about/`}>About</a></li>
@@ -94,11 +112,11 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
           </ul>
         </nav> -->
       </header>
-      
+
       <main class="content">
         <slot />
       </main>
-      
+
       <footer class="footer">
         <div class="footer__inner">
           <a
@@ -118,85 +136,100 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
               <path
                 fill="currentColor"
                 d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.86 3.16 8.98 7.55 10.44.55.1.75-.24.75-.53v-1.86c-3.07.67-3.72-1.31-3.72-1.31-.5-1.27-1.22-1.61-1.22-1.61-1-.68.08-.67.08-.67 1.1.08 1.68 1.13 1.68 1.13.98 1.67 2.57 1.19 3.2.91.1-.71.38-1.19.69-1.47-2.45-.28-5.02-1.22-5.02-5.44 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.4.11-2.92 0 0 .92-.29 3.01 1.13.87-.24 1.8-.36 2.73-.36.93 0 1.86.12 2.73.36 2.09-1.42 3.01-1.13 3.01-1.13.6 1.52.22 2.64.11 2.92.7.77 1.13 1.75 1.13 2.95 0 4.23-2.58 5.16-5.04 5.43.39.34.74 1.01.74 2.03v3.01c0 .29.2.64.75.53 4.39-1.46 7.55-5.58 7.55-10.44C23.25 5.48 18.27.5 12 .5Z"
-              />
+              ></path>
             </svg>
           </a>
         </div>
       </footer>
     </div>
-    
+
     <script>
       // Menu functionality
       (() => {
-        const themeToggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+        const themeToggle = document.querySelector<HTMLButtonElement>(
+          "[data-theme-toggle]"
+        );
         const applyTheme = (theme: string) => {
           const root = document.documentElement;
           if (!theme || theme === "default") {
             delete root.dataset.theme;
-            try { localStorage.removeItem("theme"); } catch {}
-            if (themeToggle) themeToggle.textContent = "Theme: Default";
+            try {
+              localStorage.removeItem("theme");
+            } catch {}
+            if (themeToggle) themeToggle.textContent = "Theme: Green";
             return;
           }
           root.dataset.theme = theme;
-          try { localStorage.setItem("theme", theme); } catch {}
-          if (themeToggle) themeToggle.textContent = `Theme: ${theme[0].toUpperCase()}${theme.slice(1)}`;
+          try {
+            localStorage.setItem("theme", theme);
+          } catch {}
+          if (themeToggle)
+            themeToggle.textContent = `Theme: ${theme[0].toUpperCase()}${theme.slice(1)}`;
         };
 
-        const currentTheme = document.documentElement.dataset.theme || "default";
+        const currentTheme =
+          document.documentElement.dataset.theme || "default";
         applyTheme(currentTheme);
 
         if (themeToggle) {
           themeToggle.addEventListener("click", (event) => {
             event.stopPropagation();
-            const next = (document.documentElement.dataset.theme || "default") === "green" ? "default" : "green";
+            const next =
+              (document.documentElement.dataset.theme || "default") === "amber"
+                ? "default"
+                : "amber";
             applyTheme(next);
           });
         }
 
         const container = document.querySelector(".container");
         const menus = document.querySelectorAll(".menu");
-        
+
         // Close menus when clicking outside
         document.body.addEventListener("click", () => {
-          menus.forEach(menu => {
+          menus.forEach((menu) => {
             if (menu.classList.contains("open")) {
               menu.classList.remove("open");
             }
           });
         });
-        
+
         // Close menus on window resize
         window.addEventListener("resize", () => {
-          menus.forEach(menu => {
+          menus.forEach((menu) => {
             menu.classList.remove("open");
           });
         });
-        
+
         // Menu trigger functionality
-        menus.forEach(menu => {
+        menus.forEach((menu) => {
           const trigger = menu.querySelector(".menu__trigger");
           const dropdown = menu.querySelector<HTMLElement>(".menu__dropdown");
-          
+
           if (trigger && dropdown) {
-            trigger.addEventListener("click", event => {
+            trigger.addEventListener("click", (event) => {
               event.stopPropagation();
-              
+
               if (menu.classList.contains("open")) {
                 menu.classList.remove("open");
               } else {
                 // Close other menus
-                menus.forEach(m => m.classList.remove("open"));
+                menus.forEach((m) => m.classList.remove("open"));
                 menu.classList.add("open");
               }
-              
+
               // Adjust dropdown position if it goes outside container
-              if (container && dropdown.getBoundingClientRect().right > container.getBoundingClientRect().right) {
+              if (
+                container &&
+                dropdown.getBoundingClientRect().right >
+                  container.getBoundingClientRect().right
+              ) {
                 dropdown.style.left = "auto";
                 dropdown.style.right = "0";
               }
             });
-            
-            dropdown.addEventListener("click", e => e.stopPropagation());
+
+            dropdown.addEventListener("click", (e) => e.stopPropagation());
           }
         });
       })();
