@@ -1,30 +1,35 @@
 ---
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const filePath = fileURLToPath(new URL('../../public/ascii-art.txt', import.meta.url));
+const asciiArt = readFileSync(filePath, 'utf-8');
+
 ---
 
 <BaseLayout title="About">
   <div class="page">
-    <h1>About</h1>
+    <h1>Noisk8</h1>
+
+        <pre class="ascii-art" aria-label="ASCII art">{asciiArt}</pre>
     <p>
-      This is the Astro Terminal theme, a port of the fantastic
-      <a href="https://github.com/panr/hugo-theme-terminal" target="_blank" rel="noopener">Hugo Terminal theme</a>
-      created by <a href="https://github.com/panr" target="_blank" rel="noopener">panr</a>.
+
+      Soy Juan Jaramillo Silva (aka Noisk8), un Desarrollador de Software y Músico / LiveCoder.
+         <br>
+      <br>
+      Si quieres ver mi trabajo como hacedor del sonido revisa mi
+      <a href="https://musica.noisk8.xyz/" target="_blank" rel="noopener">Portafolio sonoro</a>
+      
     </p>
+
     
     <p>
-      The Astro version maintains all the great features of the original theme whilst using Astro's modern 
-      static site generation capabilities.
+     Conoce mi experiencia como Desarrollador de software mira revisa el  🧐
+      <a href="https://dev.noisk8.xyz/" target="_blank" rel="noopener">CV</a>
+      
     </p>
-    
-    <p>
-      The theme features syntax highlighting with Shiki, customisable colour schemes via
-      <a href="https://panr.github.io/terminal-css/" target="_blank" rel="noopener">Terminal.css</a>,
-      Fira Code monospace font, and a beautiful retro terminal aesthetic.
-    </p>
-    
-    <p>
-      Ported to Astro by <a href="https://github.com/dennisklappe" target="_blank" rel="noopener">Dennis Klappe</a>.
-    </p>
+  
   </div>
 </BaseLayout>
 
